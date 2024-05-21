@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 class CryptoCoinRepository {
   final Dio _dio = Dio();
   final URL =
-      'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH&tsyms=USD';
+      'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,TON,USDT&tsyms=USD';
 
   Future<List<CryptoCoin>> fetchCriptoData() async {
     try {

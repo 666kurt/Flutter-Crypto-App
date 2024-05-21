@@ -1,14 +1,16 @@
 class CryptoCoin {
   final String name;
-  final double price;
+  final String price;
   final String imagePath;
   final String symbol;
+  final String market;
 
   CryptoCoin({
     required this.name,
     required this.price,
     required this.imagePath,
     required this.symbol,
+    required this.market,
   });
 
   factory CryptoCoin.fromJson(String name, Map<String, dynamic> json) {
@@ -17,6 +19,7 @@ class CryptoCoin {
       price: json['USD']['PRICE'],
       imagePath: json['USD']['IMAGEURL'],
       symbol: json['USD']['FROMSYMBOL'],
+      market: json['USD']['MARKET'],
     );
   }
 }
