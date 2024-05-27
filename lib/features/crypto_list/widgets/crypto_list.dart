@@ -1,6 +1,7 @@
+import 'package:crypto_app/features/crypto_list/bloc/crypto_list_bloc.dart';
 import 'package:crypto_app/features/crypto_list/widgets/widgets.dart';
-import 'package:crypto_app/repositories/repositories.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CryptoList extends StatefulWidget {
   const CryptoList({super.key});
@@ -10,37 +11,34 @@ class CryptoList extends StatefulWidget {
 }
 
 class _CryptoListState extends State<CryptoList> {
-  late Future<List<CryptoCoin>> _coins;
-
   @override
   void initState() {
-    _coins = CryptoCoinRepository().fetchCriptoData();
     super.initState();
+    context.read<CryptoBloc>().add(LoadCryptoList());
   }
 
   @override
   Widget build(BuildContext context) {
     final app_theme = Theme.of(context);
-    return FutureBuilder(
-      future: _coins,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text('Error ${snapshot.error}'));
-        } else {
-          final coinsList = snapshot.data!;
-          return ListView.separated(
-            itemCount: coinsList.length,
-            separatorBuilder: (context, index) =>
-                Divider(color: app_theme.dividerColor),
-            itemBuilder: (context, index) {
-              final coin = coinsList[index];
-              return CryptoTile(coin: coin);
-            },
-          );
-        }
-      },
-    );
+    return BlocBuilder<CryptoBloc, CryptoState>(builder: (context, state) {
+      if (state is CryptoLoading) {
+        return Center(child: CircularProgressIndicator());
+      } else if (state is CryptoLoadFailure) {
+        return Center(child: Text('Error: ${state.error}'));
+      } else if (state is CryptoListLoadSuccess) {
+        final coinsList = state.coins;
+        return ListView.separated(
+          itemCount: coinsList.length,
+          separatorBuilder: (context, index) =>
+              Divider(color: app_theme.dividerColor),
+          itemBuilder: (context, index) {
+            final coin = coinsList[index];
+            return CryptoTile(coin: coin);
+          },
+        );
+      } else {
+        return Center(child: Text('Some problems :)'));
+      }
+    });
   }
 }
