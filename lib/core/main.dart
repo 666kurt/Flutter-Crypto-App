@@ -1,4 +1,4 @@
-import 'package:crypto_app/theme/app_theme.dart';
+import 'package:crypto_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'routes/routes.dart';
 
