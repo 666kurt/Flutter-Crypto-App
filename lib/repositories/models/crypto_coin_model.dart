@@ -5,6 +5,10 @@ class CryptoCoin {
   final String symbol;
   final String market;
   final List<double> prices;
+  final String openDay;
+  final String highDay;
+  final String lowDay;
+  final String changeHour;
 
   CryptoCoin({
     required this.name,
@@ -13,6 +17,10 @@ class CryptoCoin {
     required this.symbol,
     required this.market,
     required this.prices,
+    required this.openDay,
+    required this.highDay,
+    required this.lowDay,
+    required this.changeHour,
   });
 
   factory CryptoCoin.fromJson(String name, Map<String, dynamic> json) {
@@ -34,6 +42,10 @@ class CryptoCoin {
       symbol: json['USD']['FROMSYMBOL'],
       market: json['USD']['MARKET'],
       prices: prices,
+      openDay: json['USD']['OPENDAY'],
+      highDay: json['USD']['HIGHDAY'],
+      lowDay: json['USD']['LOWDAY'],
+      changeHour: json['USD']['CHANGEHOUR'],
     );
   }
 }

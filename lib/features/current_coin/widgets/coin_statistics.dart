@@ -11,7 +11,7 @@ class CoinStatistics extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: app_theme.colorScheme.secondary,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -19,7 +19,15 @@ class CoinStatistics extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildStatisticItem(coin.price, coin.name, app_theme),
+              _buildStatisticItem(coin.openDay, 'OPEN DAY', app_theme),
+              _buildStatisticItem(coin.highDay, 'HIGH DAY', app_theme),
+            ],
+          ),
+          SizedBox(height: 15),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildStatisticItem(coin.highDay, 'HIGH DAY', app_theme),
               _buildStatisticItem(coin.price, coin.name, app_theme),
             ],
           ),
@@ -27,15 +35,7 @@ class CoinStatistics extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildStatisticItem(coin.price, coin.name, app_theme),
-              _buildStatisticItem(coin.price, coin.name, app_theme),
-            ],
-          ),
-          SizedBox(height: 15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildStatisticItem(coin.price, coin.name, app_theme),
+              _buildStatisticItem(coin.lowDay, 'LOW DAY', app_theme),
               _buildStatisticItem(coin.price, coin.name, app_theme),
             ],
           ),
@@ -49,8 +49,8 @@ class CoinStatistics extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          value,
-          style: theme.textTheme.bodyMedium,
+          '${value}',
+          style: theme.textTheme.bodySmall,
         ),
         SizedBox(height: 4),
         Text(

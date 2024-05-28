@@ -8,37 +8,32 @@ class CoinPriceInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final app_theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           coin.price,
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: app_theme.textTheme.bodyLarge,
         ),
         Row(
           children: [
             Text(
-              '123',
-              style: TextStyle(
-                color: Colors.white.withOpacity(0.5),
-                fontSize: 16,
-              ),
+              coin.changeHour,
+              style: app_theme.textTheme.labelSmall,
             ),
             SizedBox(width: 10),
             Text(
-              '-12%',
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 16,
-              ),
+              '${getVolume(coin.price, coin.openDay)}%',
+              style: app_theme.textTheme.labelSmall,
             ),
           ],
         )
       ],
     );
+  }
+
+  int getVolume(String price, String openDay) {
+    return 15;
   }
 }

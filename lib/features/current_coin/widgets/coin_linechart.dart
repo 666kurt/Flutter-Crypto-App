@@ -7,12 +7,13 @@ class CoinLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final app_theme = Theme.of(context);
     return SizedBox(
       height: 300,
       child: LineChart(
         LineChartData(
           titlesData: FlTitlesData(show: false),
-          gridData: FlGridData(show: false),
+          gridData: FlGridData(show: true),
           borderData: FlBorderData(show: false),
           lineBarsData: [
             LineChartBarData(
@@ -22,8 +23,12 @@ class CoinLineChart extends StatelessWidget {
                   .map((e) => FlSpot(e.key.toDouble(), e.value))
                   .toList(),
               isCurved: true,
-              color: Colors.blue,
-              barWidth: 2,
+              color: app_theme.primaryColor,
+              barWidth: 4,
+              belowBarData: BarAreaData(
+                show: true,
+                color: app_theme.primaryColor.withOpacity(0.3),
+              ),
             ),
           ],
         ),
