@@ -8,7 +8,8 @@ class CryptoCoin {
   final String openDay;
   final String highDay;
   final String lowDay;
-  final String changeHour;
+  final String changeDay;
+  final String changePrcDay;
 
   CryptoCoin({
     required this.name,
@@ -20,7 +21,8 @@ class CryptoCoin {
     required this.openDay,
     required this.highDay,
     required this.lowDay,
-    required this.changeHour,
+    required this.changeDay,
+    required this.changePrcDay,
   });
 
   factory CryptoCoin.fromJson(String name, Map<String, dynamic> json) {
@@ -45,7 +47,8 @@ class CryptoCoin {
       openDay: json['USD']['OPENDAY'],
       highDay: json['USD']['HIGHDAY'],
       lowDay: json['USD']['LOWDAY'],
-      changeHour: json['USD']['CHANGEHOUR'],
+      changeDay: json['USD']['CHANGEDAY'],
+      changePrcDay: json['USD']['CHANGEPCTDAY'],
     );
   }
 }
